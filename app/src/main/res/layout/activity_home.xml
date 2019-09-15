@@ -4,31 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".HomeActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/tab_layout">
+
+        android:id="@+id/tab_layout"
+        android:weightSum="2">
 
         <TextView
-            android:id="@+id/profile"
-            android:layout_width="wrap_content"
+            android:id="@+id/upcominglaunches"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Profile"
-            android:textSize="22sp"
-            android:padding="15sp"
-            android:textColor="@color/textTabBright"/>
+            android:text="Upcoming"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:padding="10sp"
+            android:textColor="@color/textTabBright"
+            android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/allUsers"
-            android:layout_width="wrap_content"
+            android:id="@+id/pastlaunches"
+            android:layout_width="match_parent"
+            android:textStyle="bold"
             android:textSize="16sp"
-            android:padding="15sp"
+            android:padding="10sp"
+            android:textAllCaps="true"
+            android:textAlignment="center"
             android:textColor="@color/textTabLight"
             android:layout_height="wrap_content"
-            android:text="All Users"
+            android:text="Previous"
+            android:layout_weight="1"
             />
         <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
@@ -41,11 +52,20 @@
 
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tab_layout"
-        android:id="@+id/mainPager">
-    </android.support.v4.view.ViewPager>
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        app:cardCornerRadius="15dp">
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tab_layout"
+            android:id="@+id/mainPager">
+        </androidx.viewpager.widget.ViewPager>
+    </androidx.cardview.widget.CardView>
+
 
 </RelativeLayout>

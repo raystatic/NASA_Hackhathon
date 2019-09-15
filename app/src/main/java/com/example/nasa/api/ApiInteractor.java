@@ -41,6 +41,7 @@ public class ApiInteractor {
             @Override
             public void onFailure(Call call, Throwable t) {
                 launchDataListener.onError("Something went wrong! Please try again later");
+                Log.d("launcherror",t.getLocalizedMessage());
             }
         });
     }

@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-    @GET("launch/next/{i}")
+    @GET("index.php")
     Call<List<LaunchData>> getLaunchData(@Query("type") String type);
 
 }

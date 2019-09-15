@@ -11,15 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nasa.R;
-import com.example.nasa.describe;
+import com.example.nasa.Describe;
 import com.example.nasa.launches.models.LaunchData;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyViewHolder> {
@@ -67,11 +69,13 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
 
         Picasso.get().load(data.getRocketImageUrl())
                 .into(target);
-        holder.view.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(context, Describe.class);
 
-                Intent i = new Intent(context, describe.class);
+                Intent in = new Intent(context,Describe.class);
+                i.putExtra("data",data);
                 context.startActivity(i);
             }
         });
@@ -86,9 +90,10 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
         TextView launchname,rocketname,locationname,date;
         ImageView image;
         View view;
+        CardView cardView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.view=itemView;
+            cardView=itemView.findViewById(R.id.cardView);
             launchname = itemView.findViewById(R.id.launch_name);
             rocketname = itemView.findViewById(R.id.rocket_name);
             locationname = itemView.findViewById(R.id.location_name);

@@ -9,6 +9,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/cardView"
         android:background="@android:color/transparent"
         android:layout_margin="12dp"
         app:cardCornerRadius="10dp">
@@ -23,10 +24,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxHeight="300dp"
-                    android:src="@drawable/bk"
+                    android:src="@drawable/default_image"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
+                    android:transitionName="imageMain"
                     android:layout_marginBottom="5dp"
                     android:adjustViewBounds="true"
                     android:id="@+id/image"/>

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.nasa.HomeActivity;
 import com.example.nasa.R;
 import com.example.nasa.api.ApiInteractor;
 import com.example.nasa.api.ApiRepository;
@@ -28,8 +29,9 @@ public class UpcomingFragment extends Fragment implements LaunchDataListener {
 
     RecyclerView recyclerView;
     UpcomingAdapter adapter;
-
-    public UpcomingFragment() {
+    HomeActivity homeActivity;
+    public UpcomingFragment(HomeActivity homeActivity) {
+        this.homeActivity=homeActivity;
         // Required empty public constructor
     }
 
@@ -43,8 +45,8 @@ public class UpcomingFragment extends Fragment implements LaunchDataListener {
         recyclerView = view.findViewById(R.id.upcomingrv);
 
         ApiInteractor apiInteractor = new ApiInteractor(this.requireContext(),new ApiRepository());
-
         apiInteractor.getLaunchData(this,"getUpcomingLaunches");
+
 
         return view;
     }
@@ -56,10 +58,12 @@ public class UpcomingFragment extends Fragment implements LaunchDataListener {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        homeActivity.loder.setVisibility(View.GONE);
     }
 
     @Override
     public void onError(String error) {
+        homeActivity.loder.setVisibility(View.GONE);
         Toast.makeText(this.requireContext(),error,Toast.LENGTH_SHORT).show();
     }
 }

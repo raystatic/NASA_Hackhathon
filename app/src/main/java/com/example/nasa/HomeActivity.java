@@ -5,6 +5,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.nasa.launches.view.adapters.PagerViewAdapter;
@@ -13,6 +14,8 @@ public class HomeActivity extends AppCompatActivity {
 
     TextView upcoming, past;
     ViewPager viewPager;
+    public LinearLayout loder;
+
     PagerViewAdapter pagerViewAdapter;
 
     @Override
@@ -21,12 +24,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         upcoming = findViewById(R.id.upcominglaunches);
+        loder = findViewById(R.id.loder);
         past = findViewById(R.id.pastlaunches);
-
         viewPager=findViewById(R.id.mainPager);
 
-        pagerViewAdapter=new PagerViewAdapter(getSupportFragmentManager());
+        pagerViewAdapter=new PagerViewAdapter(getSupportFragmentManager(),this);
         viewPager.setAdapter(pagerViewAdapter);
+
 
         upcoming.setOnClickListener(new View.OnClickListener() {
             @Override

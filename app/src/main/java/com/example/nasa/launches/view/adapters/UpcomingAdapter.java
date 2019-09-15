@@ -1,23 +1,30 @@
 package com.example.nasa.launches.view.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nasa.R;
+import com.example.nasa.describe;
 import com.example.nasa.launches.models.LaunchData;
-
-import org.w3c.dom.Text;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
 public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyViewHolder> {
 
+    Bitmap image;
     Context context;
     List<LaunchData> launchData;
 
@@ -40,6 +47,34 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
         holder.rocketname.setText(data.getRocketName());
         holder.launchname.setText(data.getLaunchName());
         holder.date.setText(data.getDate());
+
+        Target target =new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                holder.image.setImageBitmap(bitmap);
+                image=bitmap;
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+            }
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        };
+
+        Picasso.get().load(data.getRocketImageUrl())
+                .into(target);
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(context, describe.class);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -49,12 +84,16 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView launchname,rocketname,locationname,date;
+        ImageView image;
+        View view;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.view=itemView;
             launchname = itemView.findViewById(R.id.launch_name);
             rocketname = itemView.findViewById(R.id.rocket_name);
             locationname = itemView.findViewById(R.id.location_name);
             date = itemView.findViewById(R.id.date);
+            image = itemView.findViewById(R.id.image);
         }
     }
 
